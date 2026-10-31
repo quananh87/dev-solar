@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSolar - Giải Pháp Điện Mặt Trời & Lưu Trữ Năng Lượng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --secondary: #f59e0b;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: var(--dark);
+            color: #94a3b8;
+            padding: 0.5rem 2rem;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .hotline-btn {
+            background-color: var(--primary);
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .hotline-btn:hover {
+            background-color: #0369a1;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=1200&q=80') center/cover;
+            color: #fff;
+            text-align: center;
+            padding: 6rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            color: var(--secondary);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 750px;
+            margin: 0 auto 2.5rem auto;
+            color: #cbd5e1;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: #64748b;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .card-body h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+
+        .card-body p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: var(--primary);
+            color: #fff;
+            text-align: center;
+            padding: 0.85rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #0369a1;
+        }
+
+        /* Brands Section */
+        .brands {
+            background: #fff;
+            padding: 4rem 1rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        .brands h3 {
+            margin-bottom: 2rem;
+            color: #64748b;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .brand-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #475569;
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .contact-box p {
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .phone-big {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: background 0.2s;
+        }
+
+        .phone-big:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        footer {
+            background: var(--dark);
+            color: #64748b;
+            text-align: center;
+            padding: 2.5rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div>💡 Giải Pháp Điện Mặt Trời & Lưu Trữ Năng Lượng Đỉnh Cao</div>
+        <div>Hotline Hỗ Trợ Kỹ Thuật: 0937.677.889</div>
+    </div>
+
+    <header>
+        <div class="logo">DEVS<span>OLAR</span></div>
+        <a href="tel:0937677889" class="hotline-btn">📞 0937.677.889</a>
+    </header>
+
+    <div class="hero">
+        <h1>DevSolar – <span>Power the Future</span></h1>
+        <p>Chuyên cung cấp hệ thống điện mặt trời Hybrid, pin lưu trữ dung lượng cao và tổng thầu EPC trọn gói cho hộ gia đình, biệt thự và nhà xưởng.</p>
+        <a href="tel:0937677889" class="btn" style="max-width: 280px; margin: 0 auto; background: var(--secondary); color: var(--dark);">Nhận Tư Vấn & Báo Giá</a>
+    </div>
+
+    <div class="container">
+        <div class="section-title">
+            <h2>Giải Pháp Trọng Tâm</h2>
+            <p>Tối ưu hóa 100% hóa đơn tiền điện, vận hành an toàn và bền vững</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-body">
+                    <h3>🏠 Hộ Gia Đình & Biệt Thự</h3>
+                    <p>Giải pháp Hybrid kết hợp lưu trữ Lithium giúp chạy 3-4 máy lạnh xuyên đêm êm ru, không lo cúp điện và giảm sâu tiền điện bậc cao.</p>
+                    <a href="tel:0937677889" class="btn">Tư Vấn Giải Pháp</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3>🏭 Doanh Nghiệp & Nhà Xưởng</h3>
+                    <p>Tổng thầu EPC trọn gói, tối ưu chi phí vận hành sản xuất, đáp ứng tiêu chuẩn kỹ thuật an toàn khắt khe nhất.</p>
+                    <a href="tel:0937677889" class="btn">Tư Vấn EPC</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3>⚡ Pin Lưu Trữ & Inverter Hybrid</h3>
+                    <p>Phân phối chính thức các dòng thiết bị lưu trữ cao cấp, Cell Grade A độ xả sâu, tuổi thọ trên 10 năm.</p>
+                    <a href="tel:0937677889" class="btn">Xem Bảng Giá Thiết Bị</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="brands">
+        <h3>Phân Phối Chính Thức Các Thương Hiệu Hàng Đầu</h3>
+        <div class="brand-logos">
+            <span>HUAEWI</span>
+            <span>AIKO</span>
+            <span>SUNGROW</span>
+            <span>BYD</span>
+            <span>SIGENERGY</span>
+            <span>GOODWE</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="contact-box">
+            <h3>Bắt Đầu Dự Án Điện Mặt Trời Của Bạn Ngay Hôm Nay</h3>
+            <p>Đội ngũ kỹ thuật thực chiến sẵn sàng bóc tách con số logic, khảo sát thực tế và đưa ra phương án tối ưu dòng tiền nhanh nhất cho anh/chị.</p>
+            <a href="tel:0937677889" class="phone-big">📞 0937.677.889</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 DevSolar – Giải Pháp Điện Mặt Trời & Lưu Trữ Năng Lượng. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
