@@ -163,6 +163,7 @@ input:disabled{background:#f3f4f6;color:#6b7280}
     <label>Nhãn ưu đãi<input data-path="promo.label" placeholder="tháng 11"></label>
     <label>VAT (%)<input type="number" step="0.1" min="0" data-type="num" data-path="vat"></label>
   </div>
+  <label class="inline" style="font-size:14px;color:var(--tx)"><input type="checkbox" data-path="vatOn"> <b>Tính VAT</b> – bỏ tick để xuất báo giá không VAT, tick để xuất báo giá có VAT</label>
 </div></details>
 
 <details class="card"><summary>5. Hiệu quả đầu tư</summary><div class="body">
@@ -271,7 +272,7 @@ function defaults(){
       {id:'r10',group:'B',name:'Giàn khung Hybrid',desc:'Kẹp chuyên dụng các loại\nRây chuyên dụng\nKẹp chữ Z',mode:'kwp',price:1500000,factor:'div',qty:1,qtyAuto:false,show:false}
     ],
     promo:{pct:3.5,label:'tháng '+(new Date().getMonth()+1)},
-    vat:8,
+    vat:8,vatOn:true,
     specs:{
       ae:{on:true,title:'AE SOLAR',text:'Thương hiệu | AE Solar\nModel | AE630MO-132N\nCông nghệ | N-type TOPCon (Monocrystalline)\nCông suất định mức (Pmax) | 630Wp\nHiệu suất module | 23.2%\nĐiện áp tại công suất tối đa (Vmp) | 41.8V\nDòng điện tại công suất tối đa (Imp) | 15.06A\nĐiện áp hở mạch (Voc) | 49.2V\nDòng điện ngắn mạch (Isc) | 15.87A\nKích thước (Dài x Rộng x Dày) | 2382 x 1134 x 30 mm\nTrọng lượng | ~ 32.5 kg'},
       canadian:{on:true,title:'CANADIAN SOLAR',text:'Thương hiệu | Canadian Solar\nModel | CS6.2-66TB-630\nCông nghệ | N-type TOPCon (Bifacial)\nCông suất định mức (Pmax) | 630Wp\nHiệu suất module | 23.3%\nĐiện áp tại công suất tối đa (Vmp) | 41.6V\nDòng điện tại công suất tối đa (Imp) | 15.16A\nĐiện áp hở mạch (Voc) | 48.8V\nDòng điện ngắn mạch (Isc) | 16.20A\nKích thước (Dài x Rộng x Dày) | 2382 x 1134 x 30 mm\nTrọng lượng | ~32.8kg'},
@@ -338,7 +339,7 @@ function calc(S){
   const pct=+S.promo.pct||0;
   const discount=Math.round(sub*pct/100);                            // =B11*B12
   const after=sub-discount;                                          // =B11-B13
-  const vatPct=+S.vat||0;
+  const vatPct=S.vatOn===false?0:(+S.vat||0);
   const vatAmt=Math.round(after*vatPct/100);                         // =B14*B15
   const total=after+vatAmt;                                          // =B14+B16
   const dc=rows.filter(r=>r.id&&r.qtyAuto)[0];
@@ -818,7 +819,7 @@ function buildDossierBlocks(S,c,opt){
 
 const fileBase=(S,c)=>{
   const nm=(S.customer.name||'KhachHang').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').replace(/[^A-Za-z0-9]+/g,'_').replace(/^_|_$/g,'');
-  return `BaoGia_${nm}_${+S.system.kwp}kWp_${fmtDate(S.customer.date).replace(/\//g,'')}`;
+  return `BaoGia_${nm}_${+S.system.kwp}kWp_${fmtDate(S.customer.date).replace(/\//g,'')}_${(S.vatOn===false||!(+S.vat))?'khongVAT':'coVAT'}`;
 };
 </script>
 
