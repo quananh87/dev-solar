@@ -118,11 +118,12 @@ input:disabled{background:#f3f4f6;color:#6b7280}
     <label>Ngày báo giá<input type="date" data-path="customer.date"></label>
   </div>
   <label>Địa chỉ<input data-path="customer.address"></label>
+  <label>Nhân viên tư vấn / phụ trách (chọn trong danh sách hoặc gõ tên)<input list="staffList" data-path="customer.consultant" placeholder="VD: Lê Nguyên Thủy"></label><datalist id="staffList"></datalist>
   <label style="max-width:160px">Hiệu lực (ngày)<input type="number" min="0" data-type="num" data-path="customer.valid"></label>
 </div></details>
 
 <details class="card"><summary>1b. Hồ sơ khảo sát (cho bản Hồ sơ đầy đủ)</summary><div class="body">
-  <div class="g2"><label>Ngày khảo sát<input type="date" data-path="customer.survey"></label><label>Nhân viên tư vấn<input data-path="customer.consultant"></label></div>
+  <label style="max-width:220px">Ngày khảo sát<input type="date" data-path="customer.survey"></label>
   <div><div class="hint" style="margin-bottom:4px">Loại công trình</div><div class="chk"><label class="inline"><input type="checkbox" data-ctype="Nhà ở"> Nhà ở</label><label class="inline"><input type="checkbox" data-ctype="Cửa hàng"> Cửa hàng</label><label class="inline"><input type="checkbox" data-ctype="Văn phòng"> Văn phòng</label><label class="inline"><input type="checkbox" data-ctype="Nhà xưởng"> Nhà xưởng</label><label class="inline"><input type="checkbox" data-ctype="Khác"> Khác</label></div></div>
   <label>Khác (ghi rõ)<input data-path="customer.typeOther"></label>
   <div class="g3">
@@ -192,6 +193,7 @@ input:disabled{background:#f3f4f6;color:#6b7280}
     <label>Website<input data-path="company.web"></label>
     <label>Email<input data-path="company.email"></label>
   </div>
+  <label>Danh sách nhân viên tư vấn (mỗi dòng một tên)<textarea rows="3" data-type="lines" data-path="staff"></textarea></label>
   <label>Ký tên cuối báo giá<input data-path="company.signer"></label>
   <div class="g2"><label>TikTok<input data-path="company.tiktok"></label><label>Địa chỉ (trang liên hệ hồ sơ)<input data-path="company.address2"></label></div>
   <label>Logo (PNG/JPG)<input type="file" id="logoIn" accept="image/*"></label>
@@ -253,6 +255,7 @@ const n2=n=>String(Math.round((+n||0)*100)/100);
 function defaults(){
   return {
     company:{name:'CÔNG TY TNHH ROBUST',slogan:'DevSolar - Power the Future',address:'238-240-242 Nguyễn Oanh, P. Gò Vấp, TP. Hồ Chí Minh',mst:'0317311678',phone:'0937.677.889',web:'devsolar.com.vn',email:'sale01@devsolar.com.vn',contact:'0937.677.889',tiktok:'Devsolar',address2:'238 – 240 – 242, Nguyễn Oanh, phường Gò Vấp, Thành phố Hồ Chí Minh',signer:'CÔNG TY TNHH ROBUST',logo:'data:image/png;base64,'+LOGO_B64,logoW:LOGO_W,logoH:LOGO_H},
+    staff:['Lê Nguyên Thủy'],
     customer:{name:'ANH VINH',phone:'0933778666',address:'8A ĐƯỜNG 663 THÁI MỸ CŨ CHI TPHCM',date:todayISO(),valid:15,survey:todayISO(),types:[],typeOther:'',bill:0,kwh:0,roofArea:0,roofType:'',morning:30,goal:'Giảm tiền điện',consultant:'Lê Nguyên Thủy'},
     system:{kwp:25,wp:630,invkw:30,phase:3,pv:1},
     rows:[
@@ -968,6 +971,7 @@ function update(){
   // bản xem trước
   $('#paper').innerHTML=blocksToHTML(mode==='dossier'?buildDossierBlocks(S,c):buildBlocks(S,c),S);
   $('#diagram').innerHTML=buildSystemSVG(S,c).svg.replace(/width="\d+" height="\d+"/,'style="width:100%;height:auto;display:block"');
+  $('#staffList').innerHTML=(S.staff||[]).map(n=>`<option value="${esc(n)}"></option>`).join('');
   fit();persist();
 }
 function fit(){
@@ -1115,7 +1119,7 @@ $('#fileIn').addEventListener('change',e=>{
 });
 $('#btnNew').onclick=()=>{
   if(!confirm('Tạo báo giá mới? Thông tin khách hàng sẽ được xoá, đơn giá và cấu hình giữ nguyên.'))return;
-  S.customer={name:'',phone:'',address:'',date:todayISO(),valid:S.customer.valid||15};
+  S.customer=Object.assign(defaults().customer,{name:'',phone:'',address:'',valid:S.customer.valid||15,consultant:S.customer.consultant});
   S.promo.label='tháng '+(new Date().getMonth()+1);
   fillStatic();update();
 };
