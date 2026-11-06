@@ -328,20 +328,19 @@ function defaults(){
     },
     pkg:{type:'prod',prod:{min:2200,max:2500},home:{min:3500,max:3800},share:100},
     staff:['Lê Nguyên Thủy'],
-    customer:{name:'ANH VINH',phone:'0933778666',address:'8A ĐƯỜNG 663 THÁI MỸ CŨ CHI TPHCM',date:todayISO(),valid:15,survey:todayISO(),types:[],typeOther:'',bill:0,kwh:0,roofArea:0,roofType:'',morning:30,goal:'Giảm tiền điện',consultant:'Lê Nguyên Thủy'},
-    system:{kwp:25,wp:630,eff:23.2,invkw:30,phase:3,pv:1},
+    customer:{name:'Quý Khách hàng',phone:'',address:'',date:todayISO(),valid:15,survey:todayISO(),types:[],typeOther:'',bill:0,kwh:0,roofArea:0,roofType:'',morning:30,goal:'Giảm tiền điện',consultant:'Lê Nguyên Thủy'},
+    system:{kwp:20.48,wp:640,eff:23.2,invkw:16,phase:3,pv:1},
     rows:[
-      {id:'r1',group:'A',name:'Tấm PIN Năng Lượng Mặt Trời:\nAE Solar {wp}Wp\nTop 3 Thế giới',desc:'Công suất: {wp}Wp\nHiệu suất tấm pin: {eff}%\nChống nước, chống bụi: IP 68\nKích thước: 2383×1133×30\nĐiện áp làm việc tối đa (Vmp): 42.00\nĐiện áp hở mạch (Voc): 50.20\nDòng ngắt mạch (Isc): 16.09\nDòng cực đại (Imp): 15.00\nPin đạt tiêu chuẩn: CE, UL..\nBảo hành: 15 năm (theo nhà sản xuất)\nHiệu suất > 80% sau 25 năm',uom:'Tấm',mode:'manual',price:2495370,factor:'none',qty:39,qtyAuto:true,show:true,img:'qae',imgData:'',priceSrc:'panel',panelId:'ae'},
-      {id:'r2',group:'A',name:'INVERTER Hòa Lưới:\nDEYE - {kw}KW – {pha}P\n( Tiêu chuẩn châu âu)\nTop 6 Thế giới',desc:'Thương hiệu: DEYE\nHệ thống điện: {pha} pha\nSố cổng PV: {pv}\nTuân thủ các tiêu chuẩn quản lý chất lượng theo EVN\nBảo hành: 5 năm (theo nhà sản xuất)',uom:'Bộ',mode:'manual',price:30092593,factor:'none',qty:1,qtyAuto:false,show:true,img:'qdeye',imgData:'',priceSrc:'ongrid'},
-      {id:'r3',group:'A',name:'Pin Lưu Trữ Lithium\nLVTOPSUN\nTop 5 nhà máy sản xuất pin lưu trữ hàng đầu',desc:'Thương hiệu: LVTOPSUN\nĐiện áp: 51.2V\nCổng giao tiếp: CAN/RS485/RS232\nĐộ xả sâu: 90%\nHệ thống BMS kết nối wifi, bluetooth kiểm soát thông minh\nĐạt tiêu chuẩn: TUV, CE, IEC…\nBảo hành: 5 năm, tuổi thọ lên đến 15 năm',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:true,img:'qlv',priceSrc:'battery',batId:''},
-      {id:'r4',group:'B',name:'Tủ điện IP 65',desc:'MCB - DC chuyên dụng Năng lượng mặt trời\nMCB - AC chất lượng cao\nCắt sét lan truyền DC,AC\nBảo hành: 1 năm (Theo nhà sản xuất)',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:true,priceSrc:'cab',cabType:'ongrid',cabId:''},
-      {id:'r5',group:'B',name:'Phụ kiện kết nối và thi công\n( Theo bảng vẽ)',desc:'Cáp điện DC TUV 4.0mm2, cách điện XLPO\nCáp AC\nJack MC4',uom:'Theo hệ thống',mode:'kwp',price:1000000,factor:'div',qty:1,qtyAuto:false,show:true},
-      {id:'r6',group:'B',name:'Giàn khung cố định tấm pin',desc:'Kẹp chuyên dụng các loại\nRây chuyên dụng\nBát chữ Z\nNhân công thi công',uom:'Theo hệ thống',mode:'kwp',price:1500000,factor:'div',qty:1,qtyAuto:false,show:true,lowPrice:750000},
-      {id:'r7',group:'B',name:'Giàn khung bê tông cố định tấm pin',desc:'Kẹp chuyên dụng các loại\nRây chuyên dụng\nBát chữ Z\nNhân công thi công',uom:'Theo hệ thống',mode:'kwp',price:1500000,factor:'div13',qty:1,qtyAuto:false,show:false},
-      {id:'r8',group:'B',name:'Tủ điện Hybrid',desc:'MCB - DC chuyên dụng Năng lượng mặt trời\nMCB - AC chất lượng cao\nCắt sét lan truyền DC,AC\nBảo hành: 1 năm (Theo nhà sản xuất)',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:false,priceSrc:'cab',cabType:'hybrid',cabId:''},
-      {id:'r9',group:'B',name:'Phụ kiện kết nối và thi công Hybrid\n( Theo bảng vẽ)',desc:'Cáp điện DC TUV 4.0mm2, cách điện XLPO\nCáp AC\nJack MC4',uom:'Theo hệ thống',mode:'kwp',price:1350000,factor:'div',qty:1,qtyAuto:false,show:false},
+      {id:'r1',group:'A',name:'Tấm pin NLMT – AIKO Solar, Công suất {wp}wp\nTop 5 thế giới',desc:'Bảo hành 15 năm theo nhà sản xuất\nHiệu suất trên 80% sau 30 năm\nĐạt tiêu chuẩn CE,UL...',uom:'Tấm',mode:'manual',price:2495370,factor:'none',qty:39,qtyAuto:true,show:true,img:'qae',imgData:'',priceSrc:'panel',panelId:'ae'},
+      {id:'r2',group:'A',name:'Inverter Hybrid {kw}kw – {pha} pha- Deye\nTop 6 thế giới (theo tiêu chuẩn châu âu)',desc:'Bảo hành 5 năm\nTuân thủ theo tiêu chuẩn quản lý chất lượng của EVN',uom:'Bộ',mode:'manual',price:30092593,factor:'none',qty:1,qtyAuto:false,show:true,img:'qdeye',imgData:'',priceSrc:'hybrid'},
+      {id:'r3',group:'A',name:'Pin lưu trữ LVToPSun-20.07kW\nTop 5 nhà máy sản xuất Pin lưu trữ hàng đầu',desc:'Hệ thống BMS kết nối wifi, bluetooth kiểm soát thông minh\nĐạt tiêu chuẩn: TUV, CE, IEC...\nBảo hành 5 năm, tuổi thọ lên đến 15 năm',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:true,img:'qlv',priceSrc:'battery',batId:'20.07-10'},
+      {id:'r4',group:'B',name:'Tủ điện IP 65',desc:'MCB - DC chuyên dụng Năng lượng mặt trời\nMCB - AC chất lượng cao\nCắt sét lan truyền DC,AC\nBảo hành: 1 năm (Theo nhà sản xuất)',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:false,priceSrc:'cab',cabType:'ongrid',cabId:''},
+      {id:'r5',group:'B',name:'Phụ kiện kết nối và thi công\n( Theo bảng vẽ)',desc:'Cáp điện DC TUV 4.0mm2, cách điện XLPO\nCáp AC\nJack MC4',uom:'Theo hệ thống',mode:'kwp',price:1000000,factor:'div',qty:1,qtyAuto:false,show:false},
+      {id:'r6',group:'B',name:'Giàn khung cố định tấm pin',desc:'Kẹp chuyên dụng các loại\nRây chuyên dụng\nBát chữ Z\nNhân công thi công',uom:'Theo hệ thống',mode:'kwp',price:1500000,factor:'div',qty:1,qtyAuto:false,show:false,lowPrice:750000},
+      {id:'r7',group:'B',name:'Giàn khung thép hộp cố định tấm pin',desc:'Thép hộp mạ kẽm\nKẹp chuyên dụng các loại\nBát chữ Z\nNhân công thi công',uom:'Theo hệ thống',mode:'kwp',price:1800000,factor:'div',qty:1,qtyAuto:false,show:false},
+      {id:'r8',group:'B',name:'Tủ điện Hybrid',desc:'MCB - DC chuyên dụng Năng lượng mặt trời\nMCB - AC chất lượng cao\nCắt sét lan truyền DC,AC\nBảo hành: 1 năm (Theo nhà sản xuất)',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:true,priceSrc:'cab',cabType:'hybrid',cabId:''},
+      {id:'r9',group:'B',name:'Phụ kiện kết nối và thi công Hybrid\n( Theo bảng vẽ)',desc:'Cáp điện DC TUV 4.0mm2, cách điện XLPO\nCáp AC\nJack MC4',uom:'Theo hệ thống',mode:'kwp',price:1350000,factor:'div',qty:1,qtyAuto:false,show:true},
       {id:'r10',group:'B',name:'Giàn khung Hybrid',desc:'Kẹp chuyên dụng các loại\nRây chuyên dụng\nBát chữ Z\nNhân công thi công',uom:'Theo hệ thống',mode:'kwp',price:1500000,factor:'div',qty:1,qtyAuto:false,show:false,lowPrice:750000},
-      {id:'r11',group:'B',name:'Giàn khung thép hộp cố định tấm pin',desc:'Thép hộp mạ kẽm\nKẹp chuyên dụng các loại\nBát chữ Z\nNhân công thi công',uom:'Theo hệ thống',mode:'kwp',price:1800000,factor:'div',qty:1,qtyAuto:false,show:false},
       {id:'r12',group:'B',name:'Thiết bị đo đại lượng điện thông minh\n(dành cho hệ hòa lưới 3 pha)',desc:'',uom:'Bộ',mode:'manual',price:4629630,factor:'none',qty:1,qtyAuto:false,show:false}
     ],
     promo:{pct:3.5,label:'tháng '+(new Date().getMonth()+1)},
@@ -352,7 +351,7 @@ function defaults(){
       deye:{on:true,title:'DEYE',text:'Thương hiệu | DEYE\nCông suất | {kw}KW\nCông suất PV lắp đặt tối đa | 40.000W\nCông suất PV đầu vào tối đa | 32.000W\nĐiện áp PV tối đa | 800V\nDòng điện đầu vào tối đa | 36A + 36A\nDòng điện PV ngắn mạch | 54A + 54A\nHiệu suất | 97.6%\nCấp chống nước | IP65\nKích thước | 658 x 408 x 237 mm\nKhối lượng | ~32kg'},
       lvtopsun:{on:true,title:'LVTOPSUN',text:'Model | LVTS-512314-G4\nLoại pin | Lithium Iron Phosphate (LiFePO₄)\nĐiện áp danh định | 51.2V (48V hệ thống)\nDung lượng danh định | 314Ah (tương đương 16.07kWh)\nĐiện áp hoạt động | 45.6 – 56.16V\nCông suất sạc | 7.68kW\nCông suất xả | 10.24kW\nDòng sạc tối đa | 150A\nHiệu suất chuyển đổi | ≥ 95%\nChu kỳ sống | ≥ 8000 chu kỳ (90% DOD)\nKích thước (C x R x D) | 480 x 235 x 874 mm (tham khảo)\nKhối lượng | Khoảng 120 kg\nCấp bảo vệ | IP65\nNhiệt độ hoạt động | -20°C ~ 55°C\nGiao tiếp | CAN / RS485 / RS232\nBảo hành | 5 năm (có thể mở rộng)'}
     },
-    roi:{hours:4,price:3015,self:100},
+    roi:{hours:4,price:3800,self:100},
     pay:[
       {id:'p1',name:'Đợt 1',when:'Khi ký hợp đồng',pct:30},
       {id:'p2',name:'Đợt 2',when:'Trước khi vật tư, thiết bị hạ xuống và triển khai lắp đặt',pct:55},
@@ -1361,7 +1360,10 @@ function migrateList(st){
     if(T[r.id]&&/tủ điện/i.test(r.name)&&!r.cabType){r.cabType=T[r.id];r.cabId='';r.priceSrc='cab';r.mode='manual';r.factor='none'}
     if((r.id==='r6'||r.id==='r10')&&r.lowPrice==null)r.lowPrice=750000;
   });
-  ['r11','r12'].forEach(id=>{if(!byId(id)){const d=D.find(x=>x.id===id);if(d)st.rows.push(JSON.parse(JSON.stringify(d)))}});
+  ['r12'].forEach(id=>{if(!byId(id)){const d=D.find(x=>x.id===id);if(d)st.rows.push(JSON.parse(JSON.stringify(d)))}});
+  /* v19: giàn khung bê tông -> thép hộp (bảng giá 1.800.000đ/kWp, đã gồm thuế); bỏ dòng thép hộp trùng r11 */
+  {const r7=byId('r7');if(r7&&/bê tông/i.test(r7.name)){const d=D.find(x=>x.id==='r7');r7.name=d.name;r7.desc=d.desc;r7.price=d.price;r7.factor=d.factor;r7.mode=d.mode;}
+   st.rows=st.rows.filter(r=>!(r.id==='r11'&&+r.price===1800000&&/thép hộp/i.test(r.name)));}
   /* v18: nội dung/hình ảnh theo báo giá mẫu – chỉ thay khi nội dung vẫn là bản mặc định cũ */
   const OLDTXT={r1:['Tấm pin NLMT – AE Solar, Công suất {wp}wp\nTop 5 pin tại Việt Nam','Bảo hành kỹ thuật 15 năm\nBảo hành hiệu suất 25 năm\nĐạt tiêu chuẩn CE,UL…'],r2:['Inverter Hệ Hòa Lưới {kw}kw – {pha} pha\nSố cổng PV: {pv}','Bảo hành 5 năm\nTuân thủ theo tiêu chuẩn quản lý chất lượng của EVN'],r3:['Pin lưu trữ LVTopSun-20.07kW\nSố cổng PV: 1','Bảo hành 5 năm'],r4:['Tủ điện IP65','Bảo hành 1 năm\nMCB-DC chuyên dụng NLMT\nMCB-AC chất lượng cao'],r5:['Phụ kiện và thi công','Cáp điện DC TUV 4.0mm2, cách điện XLPO\nCáp AC, jack MC4\nNhân công theo bản vẽ'],r6:['Giàn khung cố định tấm pin','Kẹp chuyên dụng các loại\nRây chuyên dụng\nKẹp chữ Z'],r7:['Giàn khung bê tông cố định tấm pin','Kẹp chuyên dụng các loại\nRây chuyên dụng\nKẹp chữ Z'],r8:['Tủ điện Hybrid','Bảo hành 1 năm\nMCB-DC chuyên dụng NLMT\nMCB-AC chất lượng cao'],r9:['Phụ kiện và thi công Hybrid','Cáp điện DC TUV 4.0mm2, cách điện XLPO\nCáp AC, jack MC4\nNhân công theo bản vẽ'],r10:['Giàn khung Hybrid','Kẹp chuyên dụng các loại\nRây chuyên dụng\nKẹp chữ Z'],r11:['Giàn khung thép hộp cố định tấm pin','Thép hộp mạ kẽm\nKẹp chuyên dụng các loại\nKẹp chữ Z'],r12:['Thiết bị đo đại lượng điện thông minh\n(dành cho hệ hòa lưới 3 pha)','']};
   st.rows.forEach(r=>{const o=OLDTXT[r.id],d=D.find(x=>x.id===r.id);if(!d)return;
@@ -1418,8 +1420,8 @@ function applySrc(r){
 }
 function applyBat(r){
   const b=BATTERIES.find(x=>x.id===r.batId);if(!b)return;
-  r.name='Pin Lưu Trữ Lithium '+b.cap+'KW\nLVTOPSUN\nTop 5 nhà máy sản xuất pin lưu trữ hàng đầu';
-  r.desc='Thương hiệu: LVTOPSUN\nĐiện áp: 51.2V\nCổng giao tiếp: CAN/RS485/RS232\nĐộ xả sâu: 90%\nHệ thống BMS kết nối wifi, bluetooth kiểm soát thông minh\nĐạt tiêu chuẩn: TUV, CE, IEC…\nBảo hành: '+b.bh+' năm, tuổi thọ lên đến 15 năm';
+  r.name='Pin lưu trữ LVToPSun-'+b.cap+'kW\nTop 5 nhà máy sản xuất Pin lưu trữ hàng đầu';
+  r.desc='Hệ thống BMS kết nối wifi, bluetooth kiểm soát thông minh\nĐạt tiêu chuẩn: TUV, CE, IEC...\nBảo hành '+b.bh+' năm, tuổi thọ lên đến 15 năm';
   r.uom=r.uom||'Bộ';r.qty=1;r.show=true;
 }
 const imgOpts=r=>[['','Không dùng ảnh'],['qae','Tấm pin AE Solar (ảnh mẫu báo giá)'],['qdeye','Inverter Deye (ảnh mẫu báo giá)'],['qlv','Pin lưu trữ LVTopSun (ảnh mẫu báo giá)'],['canadian','Tấm pin Canadian Solar'],['deye','Inverter Deye Hybrid'],['ae','Tấm pin AE Solar'],['lvtopsun','Pin lưu trữ LVTopSun'],['custom','Ảnh riêng (tải lên)…']].map(o=>`<option value="${o[0]}" ${(r.img||'')===o[0]?'selected':''}>${o[1]}</option>`).join('');
