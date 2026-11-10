@@ -185,7 +185,7 @@ input:disabled{background:#f3f4f6;color:#6b7280}
 </div></details>
 
 <details class="card" open><summary>3. Thiết bị &amp; vật tư (đơn giá → thành tiền)</summary><div class="body">
-  <div class="hint">Mẫu tên/mô tả có thể dùng: <code>{wp}</code> <code>{kw}</code> <code>{pha}</code> <code>{pv}</code> <code>{kwp}</code> – sẽ tự thay theo cấu hình. Dòng có thành tiền = 0 sẽ tự ẩn khỏi báo giá.</div>
+  <div class="hint">Mẫu tên/mô tả có thể dùng: <code>{wp}</code> <code>{kw}</code> <code>{pha}</code> <code>{pv}</code> <code>{kwp}</code> <code>{vol}</code> <code>{pvmax}</code> – sẽ tự thay theo cấu hình. Dòng có thành tiền = 0 sẽ tự ẩn khỏi báo giá.</div>
   <div id="rowsBox" style="display:grid;gap:10px"></div>
   <div class="g2"><button class="add" id="addA">+ Thêm hạng mục nhóm A</button><button class="add" id="addB">+ Thêm hạng mục nhóm B</button></div>
 </div></details>
@@ -234,9 +234,11 @@ input:disabled{background:#f3f4f6;color:#6b7280}
   <div class="g2"><label>TikTok<input data-path="company.tiktok"></label><label>Địa chỉ (trang liên hệ hồ sơ)<input data-path="company.address2"></label></div>
   <label>Logo (PNG/JPG)<input type="file" id="logoIn" accept="image/*"></label>
   <label>“Đã bao gồm”<textarea rows="3" data-path="text.included"></textarea></label>
-  <label>Mục 5 – câu dẫn<input data-path="text.checklistIntro"></label>
-  <label>Mục 5 – checklist (mỗi dòng một ý)<textarea rows="6" data-type="lines" data-path="text.checklist"></textarea></label>
-  <label>Mục 6 – điều khoản (mỗi dòng một ý)<textarea rows="6" data-type="lines" data-path="text.terms"></textarea></label>
+  <label>Mục 4 – ghi chú dưới bảng thanh toán<input data-path="text.payNote"></label>
+  <label>Mục 5 – điều kiện bảo hành (mỗi dòng một ý)<textarea rows="6" data-type="lines" data-path="text.warranty"></textarea></label>
+  <label>Mục 6 – câu dẫn<input data-path="text.checklistIntro"></label>
+  <label>Mục 6 – checklist (mỗi dòng một ý)<textarea rows="6" data-type="lines" data-path="text.checklist"></textarea></label>
+  <label>Mục 7 – điều khoản (mỗi dòng một ý)<textarea rows="6" data-type="lines" data-path="text.terms"></textarea></label>
   <label>Lời cảm ơn<input data-path="text.thanks"></label>
   <label>Hồ sơ – nguyên lý hoạt động (mỗi dòng một ý)<textarea rows="5" data-type="lines" data-path="text.principle"></textarea></label>
   <label>Hồ sơ – ghi chú dưới sơ đồ<input data-path="text.principleNote"></label>
@@ -314,7 +316,7 @@ const n2=n=>String(Math.round((+n||0)*100)/100);
 
 function defaults(){
   return {
-    company:{name:'CÔNG TY TNHH ROBUST',slogan:'DevSolar - Power the Future',address:'238-240-242 Nguyễn Oanh, P. Gò Vấp, TP. Hồ Chí Minh',mst:'0317311678',phone:'0937.677.889',web:'devsolar.com.vn',email:'sale01@devsolar.com.vn',contact:'0937.677.889',tiktok:'Devsolar',address2:'238 – 240 – 242, Nguyễn Oanh, phường Gò Vấp, Thành phố Hồ Chí Minh',signer:'CÔNG TY TNHH ROBUST',logo:'data:image/png;base64,'+LOGO_B64,logoW:LOGO_W,logoH:LOGO_H},
+    company:{name:'CÔNG TY TNHH ROBUST',slogan:'DevSolar - Power the Future',address:'238-240-242 Nguyễn Oanh, P. Gò Vấp, TP. Hồ Chí Minh',mst:'0317311678',phone:'0938.233.516',web:'devsolar.com.vn',email:'sale01@devsolar.com.vn',contact:'0932.102.486 hoặc 0902.483.614',tiktok:'Devsolar',address2:'238 – 240 – 242, Nguyễn Oanh, phường Gò Vấp, Thành phố Hồ Chí Minh',signer:'CÔNG TY TNHH ROBUST',logo:'data:image/png;base64,'+LOGO_B64,logoW:LOGO_W,logoH:LOGO_H},
     contract:{
       no:'',quoteNo:'',quoteDate:'',signDate:todayISO(),place:'',type:'auto',usage:'self',auth:false,
       a:{mst:'',email:'',rep:'',title:'',authNo:'',authDate:'',bankNo:'',bankName:''},
@@ -331,27 +333,27 @@ function defaults(){
     customer:{name:'Quý Khách hàng',phone:'',address:'',date:todayISO(),valid:15,survey:todayISO(),types:[],typeOther:'',bill:0,kwh:0,roofArea:0,roofType:'',morning:30,goal:'Giảm tiền điện',consultant:'Lê Nguyên Thủy'},
     system:{kwp:20.48,wp:640,eff:23.2,invkw:16,phase:3,pv:1},
     rows:[
-      {id:'r1',group:'A',name:'Tấm pin NLMT – AIKO Solar, Công suất {wp}wp\nTop 5 thế giới',desc:'Bảo hành 15 năm theo nhà sản xuất\nHiệu suất trên 80% sau 30 năm\nĐạt tiêu chuẩn CE,UL...',uom:'Tấm',mode:'manual',price:2495370,factor:'none',qty:39,qtyAuto:true,show:true,img:'qae',imgData:'',priceSrc:'panel',panelId:'ae'},
-      {id:'r2',group:'A',name:'Inverter Hybrid {kw}kw – {pha} pha- Deye\nTop 6 thế giới (theo tiêu chuẩn châu âu)',desc:'Bảo hành 5 năm\nTuân thủ theo tiêu chuẩn quản lý chất lượng của EVN',uom:'Bộ',mode:'manual',price:30092593,factor:'none',qty:1,qtyAuto:false,show:true,img:'qdeye',imgData:'',priceSrc:'hybrid'},
-      {id:'r3',group:'A',name:'Pin lưu trữ LVToPSun-20.07kW\nTop 5 nhà máy sản xuất Pin lưu trữ hàng đầu',desc:'Hệ thống BMS kết nối wifi, bluetooth kiểm soát thông minh\nĐạt tiêu chuẩn: TUV, CE, IEC...\nBảo hành 5 năm, tuổi thọ lên đến 15 năm',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:true,img:'qlv',priceSrc:'battery',batId:'20.07-10'},
-      {id:'r4',group:'B',name:'Tủ điện IP 65',desc:'MCB - DC chuyên dụng Năng lượng mặt trời\nMCB - AC chất lượng cao\nCắt sét lan truyền DC,AC\nBảo hành: 1 năm (Theo nhà sản xuất)',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:false,priceSrc:'cab',cabType:'ongrid',cabId:''},
+      {id:'r1',group:'A',name:'Tấm PIN Năng Lượng Mặt Trời: AE Solar {wp}Wp\nTop 3 Thế giới',desc:'Công suất: {wp}Wp\nChống nước, chống bụi: IP 68\nKích thước: 2383×1133×30\nĐiện áp làm việc tối đa (Vmp) : 42.00\nĐiện áp hở mạch ( Voc): 50.20\nDòng ngắt mạch ( Isc): 16.09\nDòng cực đại (Imp): 15.00\nPin đạt tiêu chuẩn: CE, UL..\nBảo hành: 15 năm (theo nhà sản xuất)\nHiệu suất > 80% sau 25 năm',uom:'Tấm',mode:'manual',price:2495370,factor:'none',qty:39,qtyAuto:true,show:true,img:'ae',imgData:'',priceSrc:'panel',panelId:'ae'},
+      {id:'r2',group:'A',name:'INVERTER Lưu Trữ: DEYE - {kw}KW – {pha}P\n( Tiêu chuẩn châu âu)\nTop 6 Thế giới',desc:'Thương hiệu: DEYE\nHệ thống điện: {pha} pha ( {vol})\nĐiện áp PV tối đa: {pvmax}\nSố cổng PV: {pv}\nTuân thủ các tiêu chuẩn quản lý chất lượng theo EVN\nBảo hành: 5 năm (Theo nhà sản xuất)',uom:'Bộ',mode:'manual',price:30092593,factor:'none',qty:1,qtyAuto:false,show:true,img:'qdeye',imgData:'',priceSrc:'hybrid'},
+      {id:'r3',group:'A',name:'Pin Lưu Trữ Lithium 20.07KW- LVTOPSUN\nTop 5 nhà máy sản xuất pin lưu trữ hàng đầu',desc:'Thương hiệu: LVTOPSUN\nĐiện áp: 51.2V\nCổng giao tiếp: CAN/RS485/RS232\nĐộ xả sâu: 90%\nHệ thống BMS kết nối wifi, bluetooth kiểm soát thông minh\nĐạt tiêu chuẩn: TUV, CE, IEC…\nBảo hành: 10 năm, tuổi thọ lên đến 15 năm',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:true,img:'qlv',priceSrc:'battery',batId:'20.07-10'},
+      {id:'r4',group:'B',name:'Tủ điện IP65',desc:'MCB - DC chuyên dụng Năng lượng mặt trời\nMCB - AC chất lượng cao\nCắt sét lan truyền DC,AC\nBảo hành: 1 năm (Theo nhà sản xuất)',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:false,priceSrc:'cab',cabType:'ongrid',cabId:''},
       {id:'r5',group:'B',name:'Phụ kiện kết nối và thi công\n( Theo bảng vẽ)',desc:'Cáp điện DC TUV 4.0mm2, cách điện XLPO\nCáp AC\nJack MC4',uom:'Theo hệ thống',mode:'kwp',price:1000000,factor:'div',qty:1,qtyAuto:false,show:false},
       {id:'r6',group:'B',name:'Giàn khung cố định tấm pin',desc:'Kẹp chuyên dụng các loại\nRây chuyên dụng\nBát chữ Z\nNhân công thi công',uom:'Theo hệ thống',mode:'kwp',price:1500000,factor:'div',qty:1,qtyAuto:false,show:false,lowPrice:750000},
       {id:'r7',group:'B',name:'Giàn khung thép hộp cố định tấm pin',desc:'Thép hộp mạ kẽm\nKẹp chuyên dụng các loại\nBát chữ Z\nNhân công thi công',uom:'Theo hệ thống',mode:'kwp',price:1800000,factor:'div',qty:1,qtyAuto:false,show:false},
-      {id:'r8',group:'B',name:'Tủ điện Hybrid',desc:'MCB - DC chuyên dụng Năng lượng mặt trời\nMCB - AC chất lượng cao\nCắt sét lan truyền DC,AC\nBảo hành: 1 năm (Theo nhà sản xuất)',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:true,priceSrc:'cab',cabType:'hybrid',cabId:''},
-      {id:'r9',group:'B',name:'Phụ kiện kết nối và thi công Hybrid\n( Theo bảng vẽ)',desc:'Cáp điện DC TUV 4.0mm2, cách điện XLPO\nCáp AC\nJack MC4',uom:'Theo hệ thống',mode:'kwp',price:1350000,factor:'div',qty:1,qtyAuto:false,show:true},
-      {id:'r10',group:'B',name:'Giàn khung Hybrid',desc:'Kẹp chuyên dụng các loại\nRây chuyên dụng\nBát chữ Z\nNhân công thi công',uom:'Theo hệ thống',mode:'kwp',price:1500000,factor:'div',qty:1,qtyAuto:false,show:false,lowPrice:750000},
+      {id:'r8',group:'B',name:'Tủ điện IP65',desc:'MCB - DC chuyên dụng Năng lượng mặt trời\nMCB - AC chất lượng cao\nCắt sét lan truyền DC,AC\nBảo hành: 1 năm (Theo nhà sản xuất)',uom:'Bộ',mode:'manual',price:0,factor:'none',qty:1,qtyAuto:false,show:true,priceSrc:'cab',cabType:'hybrid',cabId:''},
+      {id:'r9',group:'B',name:'Phụ kiện kết nối và thi công\n( Theo bảng vẽ)',desc:'Cáp điện DC TUV 4.0mm2, cách điện XLPO\nCáp AC\nJack MC4',uom:'Theo hệ thống',mode:'kwp',price:1350000,factor:'div',qty:1,qtyAuto:false,show:true},
+      {id:'r10',group:'B',name:'Giàn khung cố định tấm pin',desc:'Kẹp chuyên dụng các loại\nRây chuyên dụng\nBát chữ Z\nNhân công thi công',uom:'Theo hệ thống',mode:'kwp',price:1500000,factor:'div',qty:1,qtyAuto:false,show:false,lowPrice:750000},
       {id:'r12',group:'B',name:'Thiết bị đo đại lượng điện thông minh\n(dành cho hệ hòa lưới 3 pha)',desc:'',uom:'Bộ',mode:'manual',price:4629630,factor:'none',qty:1,qtyAuto:false,show:false}
     ],
     promo:{pct:3.5,label:'tháng '+(new Date().getMonth()+1)},
-    vat:8,vatOn:true,mig18:false,
+    vat:8,vatOn:true,mig18:false,mig19:false,
     specs:{
       ae:{on:true,title:'AE SOLAR',text:'Thương hiệu | AE Solar\nModel | AE630MO-132N\nCông nghệ | N-type TOPCon (Monocrystalline)\nCông suất định mức (Pmax) | 630Wp\nHiệu suất module | {eff}%\nĐiện áp tại công suất tối đa (Vmp) | 41.8V\nDòng điện tại công suất tối đa (Imp) | 15.06A\nĐiện áp hở mạch (Voc) | 49.2V\nDòng điện ngắn mạch (Isc) | 15.87A\nKích thước (Dài x Rộng x Dày) | 2382 x 1134 x 30 mm\nTrọng lượng | ~ 32.5 kg'},
       canadian:{on:true,title:'CANADIAN SOLAR',text:'Thương hiệu | Canadian Solar\nModel | CS6.2-66TB-630\nCông nghệ | N-type TOPCon (Bifacial)\nCông suất định mức (Pmax) | 630Wp\nHiệu suất module | 23.3%\nĐiện áp tại công suất tối đa (Vmp) | 41.6V\nDòng điện tại công suất tối đa (Imp) | 15.16A\nĐiện áp hở mạch (Voc) | 48.8V\nDòng điện ngắn mạch (Isc) | 16.20A\nKích thước (Dài x Rộng x Dày) | 2382 x 1134 x 30 mm\nTrọng lượng | ~32.8kg'},
       deye:{on:true,title:'DEYE',text:'Thương hiệu | DEYE\nCông suất | {kw}KW\nCông suất PV lắp đặt tối đa | 40.000W\nCông suất PV đầu vào tối đa | 32.000W\nĐiện áp PV tối đa | 800V\nDòng điện đầu vào tối đa | 36A + 36A\nDòng điện PV ngắn mạch | 54A + 54A\nHiệu suất | 97.6%\nCấp chống nước | IP65\nKích thước | 658 x 408 x 237 mm\nKhối lượng | ~32kg'},
       lvtopsun:{on:true,title:'LVTOPSUN',text:'Model | LVTS-512314-G4\nLoại pin | Lithium Iron Phosphate (LiFePO₄)\nĐiện áp danh định | 51.2V (48V hệ thống)\nDung lượng danh định | 314Ah (tương đương 16.07kWh)\nĐiện áp hoạt động | 45.6 – 56.16V\nCông suất sạc | 7.68kW\nCông suất xả | 10.24kW\nDòng sạc tối đa | 150A\nHiệu suất chuyển đổi | ≥ 95%\nChu kỳ sống | ≥ 8000 chu kỳ (90% DOD)\nKích thước (C x R x D) | 480 x 235 x 874 mm (tham khảo)\nKhối lượng | Khoảng 120 kg\nCấp bảo vệ | IP65\nNhiệt độ hoạt động | -20°C ~ 55°C\nGiao tiếp | CAN / RS485 / RS232\nBảo hành | 5 năm (có thể mở rộng)'}
     },
-    roi:{hours:4,price:3800,self:100},
+    roi:{hours:4,price:3400,self:100},
     pay:[
       {id:'p1',name:'Đợt 1',when:'Khi ký hợp đồng',pct:30},
       {id:'p2',name:'Đợt 2',when:'Trước khi vật tư, thiết bị hạ xuống và triển khai lắp đặt',pct:55},
@@ -359,9 +361,11 @@ function defaults(){
     ],
     text:{
       included:'vận chuyển và giao hàng tại TP. HCM, lắp đặt hoàn chỉnh, vận hành thử tối thiểu 5 ngày, hướng dẫn phần mềm quản lý và bàn giao hệ thống.',
+      warranty:['Thiết bị được bảo hành theo chính sách và tiêu chuẩn bảo hành của nhà sản xuất.','Thi công: Bảo hành kỹ thuật, vật tư lắp đặt trong vòng 12 tháng kể từ ngày nghiệm thu bàn giao hệ thống. Trong thời gian bảo hành, nhà thầu sẽ chịu trách nhiệm khắc phục mọi sự cố kỹ thuật phát sinh do lỗi từ phía nhà cung cấp/dịch vụ.','Cung cấp dịch vụ bảo trì và hỗ trợ xử lý sự cố hệ thống trong thời hạn 12 tháng kể từ ngày nghiệm thu, bàn giao.'],
+      payNote:'Ghi chú: Điều khoản thanh toán có thể điều chỉnh tùy theo tính chất dự án và thỏa thuận cụ thể giữa hai bên.',
       checklistIntro:'Để so sánh công bằng, Quý khách có thể đối chiếu thêm các mục sau:',
       checklist:['Tấm pin, inverter, pin lưu trữ có ghi rõ hãng và model không?','Thời gian bảo hành từng hạng mục là bao lâu, của hãng hay của đơn vị thi công?','Đã gồm tủ điện, cáp, khung giàn và nhân công lắp đặt chưa, hay tính riêng?','Có vận hành thử và hướng dẫn sử dụng sau bàn giao không?','Đơn vị báo giá có địa chỉ, mã số thuế rõ ràng để bảo hành dài hạn không?'],
-      terms:['Giá chưa bao gồm VAT. Chưa gồm chi phí vận chuyển ngoại tỉnh (miễn phí giao hàng tại TP. HCM).','Bảo hành thiết bị theo tiêu chuẩn nhà sản xuất.','Sau lắp đặt, bên cung cấp hỗ trợ vận hành thử tối thiểu 5 ngày để đảm bảo hệ thống ổn định.','Hệ thống ưu tiên dùng điện mặt trời; tự động lấy lưới bù khi thiếu; khi mất điện lưới, pin lưu trữ duy trì các tải ưu tiên.'],
+      terms:['Giá chưa bao gồm VAT 8%. Chưa gồm chi phí vận chuyển ngoại tỉnh (miễn phí giao hàng tại TP. HCM).','Bảo hành thiết bị theo tiêu chuẩn nhà sản xuất.','Sau lắp đặt, bên cung cấp hỗ trợ vận hành thử tối thiểu 5 ngày để đảm bảo hệ thống ổn định.','Hệ thống ưu tiên dùng điện mặt trời; tự động lấy lưới bù khi thiếu; khi mất điện lưới, pin lưu trữ duy trì các tải ưu tiên.'],
       thanks:'Công ty ROBUST xin cảm ơn Quý khách đã quan tâm và tin tưởng giải pháp của chúng tôi.',
       principle:['1. Tấm pin chuyển ánh sáng mặt trời thành điện một chiều (DC).','2. Inverter chuyển điện DC thành điện xoay chiều (AC) để cấp cho tải trong nhà.','3. Điện mặt trời được ưu tiên dùng cho các thiết bị đang hoạt động.','4. Khi điện mặt trời không đủ, hệ thống lấy phần thiếu từ điện lưới EVN.','5. Phần điện dư (nếu có) xử lý theo cấu hình và quy định áp dụng cho công trình.'],
       principleNote:'Ghi chú: Sơ đồ là sơ đồ nguyên lý; cấu hình thực tế sẽ thay đổi theo hệ hòa lưới/hybrid và thiết kế công trình.',
@@ -430,7 +434,7 @@ function calc(S){
   return {kwp,rows,sub,pct,discount,after,vatPct,vatAmt,total,dcKwp,kwhDay,saveDay,saveMonth,saveYear,payback,pays,pctSum};
 }
 
-const tok=(S,c,s)=>String(s||'').replace(/\{wp\}/g,+S.system.wp).replace(/\{kw\}/g,+S.system.invkw).replace(/\{pha\}/g,S.system.phase).replace(/\{pv\}/g,+S.system.pv).replace(/\{kwp\}/g,+S.system.kwp).replace(/\{eff\}/g,n2(+S.system.eff));
+const tok=(S,c,s)=>String(s||'').replace(/\{wp\}/g,+S.system.wp).replace(/\{kw\}/g,+S.system.invkw).replace(/\{pha\}/g,S.system.phase).replace(/\{pv\}/g,+S.system.pv).replace(/\{kwp\}/g,+S.system.kwp).replace(/\{eff\}/g,n2(+S.system.eff)).replace(/\{vol\}/g,+S.system.phase===1?'220V/230V':'380V/400V').replace(/\{pvmax\}/g,+S.system.phase===1?'500V':'800V');
 
 /* ---- mô hình tài liệu (dùng chung cho xem trước và Word) ---- */
 function buildBlocks(S,c){
@@ -447,7 +451,7 @@ function buildBlocks(S,c){
   B.push({k:'box',lines:[
     `Sản lượng dự kiến: ${n1(c.kwhDay)}kWh/ngày -quy chuẩn ${n1(S.roi.hours)}h nắng/ngày (tuỳ theo địa phương)`,
     'Theo tiêu chuẩn Quốc tế IEC 61724\nTiền điện tiết kiệm: '+`${fmt(c.saveDay)}đ/ngày  -> ${fmt(c.saveMonth)}đ/tháng  ->  ${fmt(c.saveYear)}đ/năm\n`+
-    `Thời gian hoàn vốn dự kiến: ${n2(c.payback)} năm (tính trên giá điện ${fmt(S.roi.price)}đ/kWh)\n`+
+    `Thời gian hoàn vốn dự kiến: ${n2(c.payback)} năm (tính trên giá điện ${fmt(S.roi.price)}đ/kWh) | Dựa trên giá điện 5 bậc mới nhất\n`+
     `Quy đổi tham khảo: chi phí đầu tư chỉ ${fmt(c.saveDay)}đ/ngày  nếu chia đều cho ${n2(c.payback)} năm`]});
   B.push({k:'note',t:'Số liệu mang tính chất tham khảo theo mô phỏng dự kiến.'});
 
@@ -487,12 +491,16 @@ function buildBlocks(S,c){
   B.push({k:'h',t:'4. Phương thức thanh toán'});
   B.push({k:'table',cols:[30,45,25],head:[{t:'Đợt',a:'l'},{t:'Thời điểm',a:'l'},{t:'Số tiền (VNĐ)',a:'l'}],
     rows:c.pays.map(p=>({cells:[{t:`${p.name} - ${+p.pct}%`,a:'l'},{t:p.when,a:'l'},{t:fmt(p.amount),a:'r'}]}))});
+  if(S.text.payNote)B.push({k:'note',t:S.text.payNote});
 
-  B.push({k:'h',t:'5. Checklist khi so sánh với báo giá khác'});
+  B.push({k:'h',t:'5. Điều kiện bảo hành'});
+  B.push({k:'bullets',items:S.text.warranty});
+
+  B.push({k:'h',t:'6. Checklist khi so sánh với báo giá khác'});
   B.push({k:'p',runs:[{t:S.text.checklistIntro}]});
   B.push({k:'bullets',items:S.text.checklist});
-  B.push({k:'h',t:'6. Điều khoản chung'});
-  B.push({k:'bullets',items:S.text.terms.map(t=>c.vatPct>0?t.replace(/Giá chưa bao gồm VAT/i,`Giá đã bao gồm VAT ${+c.vatPct}%`):t)});
+  B.push({k:'h',t:'7. Điều khoản chung'});
+  B.push({k:'bullets',items:S.text.terms.map(t=>t.replace(/Giá chưa bao gồm VAT(?:\s*\d+(?:[.,]\d+)?\s*%)?/i,c.vatPct>0?`Giá đã bao gồm VAT ${+c.vatPct}%`:('Giá chưa bao gồm VAT'+(+S.vat>0?` ${+S.vat}%`:''))))});
   B.push({k:'p',runs:[{t:S.text.thanks}]});
   B.push({k:'p',runs:[{t:'Mọi thắc mắc vui lòng liên hệ: '},{t:co.contact,b:1}]});
   B.push({k:'sign',t:co.signer});
@@ -1372,11 +1380,21 @@ function migrateList(st){
     if(!st.mig18&&d.group==='A'&&!r.img&&d.img)r.img=d.img;
   });
   st.mig18=true;
+  /* v19: cập nhật BG mẫu theo BaoGia_mẫu_10112026.docx – chỉ thay khi nội dung vẫn là bản mặc định cũ */
+  const OLDTXT2={r1:['Tấm pin NLMT – AIKO Solar, Công suất {wp}wp\nTop 5 thế giới','Bảo hành 15 năm theo nhà sản xuất\nHiệu suất trên 80% sau 30 năm\nĐạt tiêu chuẩn CE,UL...'],r2:['Inverter Hybrid {kw}kw – {pha} pha- Deye\nTop 6 thế giới (theo tiêu chuẩn châu âu)','Bảo hành 5 năm\nTuân thủ theo tiêu chuẩn quản lý chất lượng của EVN'],r3:['Pin lưu trữ LVToPSun-20.07kW\nTop 5 nhà máy sản xuất Pin lưu trữ hàng đầu','Hệ thống BMS kết nối wifi, bluetooth kiểm soát thông minh\nĐạt tiêu chuẩn: TUV, CE, IEC...\nBảo hành 5 năm, tuổi thọ lên đến 15 năm'],r4:['Tủ điện IP 65','MCB - DC chuyên dụng Năng lượng mặt trời\nMCB - AC chất lượng cao\nCắt sét lan truyền DC,AC\nBảo hành: 1 năm (Theo nhà sản xuất)'],r8:['Tủ điện Hybrid','MCB - DC chuyên dụng Năng lượng mặt trời\nMCB - AC chất lượng cao\nCắt sét lan truyền DC,AC\nBảo hành: 1 năm (Theo nhà sản xuất)'],r9:['Phụ kiện kết nối và thi công Hybrid\n( Theo bảng vẽ)','Cáp điện DC TUV 4.0mm2, cách điện XLPO\nCáp AC\nJack MC4'],r10:['Giàn khung Hybrid','Kẹp chuyên dụng các loại\nRây chuyên dụng\nBát chữ Z\nNhân công thi công']};
+  st.rows.forEach(r=>{const o=OLDTXT2[r.id],d=D.find(x=>x.id===r.id);if(o&&d&&r.name===o[0]&&r.desc===o[1]){r.name=d.name;r.desc=d.desc;}});
+  if(!st.mig19){
+    const r1b=byId('r1');if(r1b&&r1b.img==='qae')r1b.img='ae';
+    const r3b=byId('r3');if(r3b&&r3b.batId&&/^Pin lưu trữ LVToPSun-/i.test(r3b.name||'')&&/^Hệ thống BMS kết nối wifi/.test(r3b.desc||''))applyBat(r3b);
+    if(st.company){if(st.company.phone==='0937.677.889')st.company.phone='0938.233.516';if(st.company.contact==='0937.677.889')st.company.contact='0932.102.486 hoặc 0902.483.614';}
+    if(st.text&&Array.isArray(st.text.terms)&&st.text.terms[0]==='Giá chưa bao gồm VAT. Chưa gồm chi phí vận chuyển ngoại tỉnh (miễn phí giao hàng tại TP. HCM).')st.text.terms[0]='Giá chưa bao gồm VAT 8%. Chưa gồm chi phí vận chuyển ngoại tỉnh (miễn phí giao hàng tại TP. HCM).';
+    st.mig19=true;
+  }
   return st;
 }
 function load(){
   try{const raw=localStorage.getItem(LS_KEY);if(raw)return migrateList(merge(defaults(),JSON.parse(raw)));}catch(e){}
-  const d0=defaults();d0.mig18=true;return d0;
+  const d0=defaults();d0.mig18=true;d0.mig19=true;return d0;
 }
 let saveT;
 function persist(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(LS_KEY,JSON.stringify(S))}catch(e){}},300)}
@@ -1420,8 +1438,8 @@ function applySrc(r){
 }
 function applyBat(r){
   const b=BATTERIES.find(x=>x.id===r.batId);if(!b)return;
-  r.name='Pin lưu trữ LVToPSun-'+b.cap+'kW\nTop 5 nhà máy sản xuất Pin lưu trữ hàng đầu';
-  r.desc='Hệ thống BMS kết nối wifi, bluetooth kiểm soát thông minh\nĐạt tiêu chuẩn: TUV, CE, IEC...\nBảo hành '+b.bh+' năm, tuổi thọ lên đến 15 năm';
+  r.name='Pin Lưu Trữ Lithium '+b.cap+'KW- LVTOPSUN\nTop 5 nhà máy sản xuất pin lưu trữ hàng đầu';
+  r.desc='Thương hiệu: LVTOPSUN\nĐiện áp: 51.2V\nCổng giao tiếp: CAN/RS485/RS232\nĐộ xả sâu: 90%\nHệ thống BMS kết nối wifi, bluetooth kiểm soát thông minh\nĐạt tiêu chuẩn: TUV, CE, IEC…\nBảo hành: '+b.bh+' năm, tuổi thọ lên đến 15 năm';
   r.uom=r.uom||'Bộ';r.qty=1;r.show=true;
 }
 const imgOpts=r=>[['','Không dùng ảnh'],['qae','Tấm pin AE Solar (ảnh mẫu báo giá)'],['qdeye','Inverter Deye (ảnh mẫu báo giá)'],['qlv','Pin lưu trữ LVTopSun (ảnh mẫu báo giá)'],['canadian','Tấm pin Canadian Solar'],['deye','Inverter Deye Hybrid'],['ae','Tấm pin AE Solar'],['lvtopsun','Pin lưu trữ LVTopSun'],['custom','Ảnh riêng (tải lên)…']].map(o=>`<option value="${o[0]}" ${(r.img||'')===o[0]?'selected':''}>${o[1]}</option>`).join('');
