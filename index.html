@@ -244,10 +244,10 @@ input:disabled{background:#f3f4f6;color:#6b7280}
   <label>Hồ sơ – ghi chú dưới sơ đồ<input data-path="text.principleNote"></label>
   <label>Hồ sơ – ghi chú bảng sản lượng<textarea rows="3" data-path="text.solarNote"></textarea></label>
   <div class="hint"><b>Thông số sản phẩm trong hồ sơ</b> – mỗi dòng: <code>Tên thông số | Giá trị</code>; dùng <code>{kw}</code> cho công suất inverter đang chọn. Pin lưu trữ chỉ hiện khi báo giá có pin.</div>
-  <div class="specbox"><label class="inline"><input type="checkbox" data-path="specs.ae.on"> <b>Tấm pin AE Solar</b></label><textarea rows="6" data-path="specs.ae.text"></textarea></div>
+  <div class="specbox"><label class="inline"><input type="checkbox" data-path="specs.ae.on"> <b>Tấm pin AE Solar</b></label><label class="inline"><input type="checkbox" data-path="specs.ae.auto"> Tự lấy theo datasheet AE CMER-132BDS khi công suất tấm pin là 610 / 615 / 620 / 625 / 630Wp</label><div class="hint">Ô bên dưới chỉ dùng khi tắt tự động hoặc khi công suất tấm pin không nằm trong datasheet.</div><textarea rows="6" data-path="specs.ae.text"></textarea></div>
   <div class="specbox"><label class="inline"><input type="checkbox" data-path="specs.canadian.on"> <b>Tấm pin Canadian Solar</b></label><textarea rows="6" data-path="specs.canadian.text"></textarea></div>
-  <div class="specbox"><label class="inline"><input type="checkbox" data-path="specs.deye.on"> <b>Inverter Deye</b> (số liệu mẫu theo bản 20kW – kiểm tra lại khi đổi cỡ)</label><textarea rows="6" data-path="specs.deye.text"></textarea></div>
-  <div class="specbox"><label class="inline"><input type="checkbox" data-path="specs.lvtopsun.on"> <b>Pin lưu trữ LVTopSun</b></label><textarea rows="6" data-path="specs.lvtopsun.text"></textarea></div>
+  <div class="specbox"><label class="inline"><input type="checkbox" data-path="specs.deye.on"> <b>Inverter Deye</b></label><label class="inline"><input type="checkbox" data-path="specs.deye.auto"> Tự lấy theo datasheet Deye SUN-OG03LP1 (1 pha: 3 / 3.6 / 5 / 6 → 6.6 / 8 → 8.8 kW)</label><div class="hint">Cỡ khác (10–16kW 1 pha, hệ 3 pha…) chưa có trong datasheet → dùng ô nhập tay bên dưới (số liệu mẫu bản 20kW, cần kiểm tra lại).</div><textarea rows="6" data-path="specs.deye.text"></textarea></div>
+  <div class="specbox"><label class="inline"><input type="checkbox" data-path="specs.lvtopsun.on"> <b>Pin lưu trữ LVTopSun</b></label><label class="inline"><input type="checkbox" data-path="specs.lvtopsun.auto"> Tự lấy theo datasheet LVTopSun</label><label>Model lấy thông số<select data-path="specs.lvtopsun.pick"><option value="">Tự theo pin đã chọn trong báo giá (5.12kWh, 16.07kWh)</option><option value="lvts512100">LVTS-512100-G3 – 51.2V 100Ah 5.12kWh</option><option value="lvts512314">LVTS-512314-G3 – 51.2V 314Ah 16.07kWh</option><option value="lvts512560">LVTS-512560 – 51.2V 560Ah 28.6kWh</option><option value="lvts512628">LVTS-512628 – 51.2V 628Ah 32kWh</option><option value="aio1">All-in-one 512100-1-AI0 – 5.12kWh + inverter 5kW</option><option value="aio2">All-in-one 512100-2-AI0 – 10.24kWh + inverter 5kW</option><option value="aio3">All-in-one 512100-3-AI0 – 15.36kWh + inverter 5kW</option><option value="aio4">All-in-one 512100-4-AI0 – 20.48kWh + inverter 5kW</option><option value="lvts256100">LVTS-256100 – 25.6V 100Ah 2.56kWh</option><option value="lvts256200">LVTS-256200 – 25.6V 200Ah 5.12kWh</option><option value="lvts256280">LVTS-256280 – 25.6V 280Ah 7.17kWh</option></select></label><div class="hint">Để “Tự theo pin đã chọn”: 5.12kWh → LVTS-512100-G3, 16.07kWh → LVTS-512314-G3. Cỡ 10.24 / 20.07kWh chưa có datasheet nên chọn model ở trên hoặc dùng ô nhập tay bên dưới (khi tắt tự động).</div><textarea rows="6" data-path="specs.lvtopsun.text"></textarea></div>
   <button class="add" id="btnReset" style="border-color:#b91c1c;color:#b91c1c;background:#fef2f2">Khôi phục toàn bộ mặc định</button>
 </div></details>
 
@@ -348,10 +348,10 @@ function defaults(){
     promo:{pct:3.5,label:'tháng '+(new Date().getMonth()+1)},
     vat:8,vatOn:true,mig18:false,mig19:false,
     specs:{
-      ae:{on:true,title:'AE SOLAR',text:'Thương hiệu | AE Solar\nModel | AE630MO-132N\nCông nghệ | N-type TOPCon (Monocrystalline)\nCông suất định mức (Pmax) | 630Wp\nHiệu suất module | {eff}%\nĐiện áp tại công suất tối đa (Vmp) | 41.8V\nDòng điện tại công suất tối đa (Imp) | 15.06A\nĐiện áp hở mạch (Voc) | 49.2V\nDòng điện ngắn mạch (Isc) | 15.87A\nKích thước (Dài x Rộng x Dày) | 2382 x 1134 x 30 mm\nTrọng lượng | ~ 32.5 kg'},
+      ae:{on:true,auto:true,title:'AE SOLAR',text:'Thương hiệu | AE Solar\nModel | AE630MO-132N\nCông nghệ | N-type TOPCon (Monocrystalline)\nCông suất định mức (Pmax) | 630Wp\nHiệu suất module | {eff}%\nĐiện áp tại công suất tối đa (Vmp) | 41.8V\nDòng điện tại công suất tối đa (Imp) | 15.06A\nĐiện áp hở mạch (Voc) | 49.2V\nDòng điện ngắn mạch (Isc) | 15.87A\nKích thước (Dài x Rộng x Dày) | 2382 x 1134 x 30 mm\nTrọng lượng | ~ 32.5 kg'},
       canadian:{on:true,title:'CANADIAN SOLAR',text:'Thương hiệu | Canadian Solar\nModel | CS6.2-66TB-630\nCông nghệ | N-type TOPCon (Bifacial)\nCông suất định mức (Pmax) | 630Wp\nHiệu suất module | 23.3%\nĐiện áp tại công suất tối đa (Vmp) | 41.6V\nDòng điện tại công suất tối đa (Imp) | 15.16A\nĐiện áp hở mạch (Voc) | 48.8V\nDòng điện ngắn mạch (Isc) | 16.20A\nKích thước (Dài x Rộng x Dày) | 2382 x 1134 x 30 mm\nTrọng lượng | ~32.8kg'},
-      deye:{on:true,title:'DEYE',text:'Thương hiệu | DEYE\nCông suất | {kw}KW\nCông suất PV lắp đặt tối đa | 40.000W\nCông suất PV đầu vào tối đa | 32.000W\nĐiện áp PV tối đa | 800V\nDòng điện đầu vào tối đa | 36A + 36A\nDòng điện PV ngắn mạch | 54A + 54A\nHiệu suất | 97.6%\nCấp chống nước | IP65\nKích thước | 658 x 408 x 237 mm\nKhối lượng | ~32kg'},
-      lvtopsun:{on:true,title:'LVTOPSUN',text:'Model | LVTS-512314-G4\nLoại pin | Lithium Iron Phosphate (LiFePO₄)\nĐiện áp danh định | 51.2V (48V hệ thống)\nDung lượng danh định | 314Ah (tương đương 16.07kWh)\nĐiện áp hoạt động | 45.6 – 56.16V\nCông suất sạc | 7.68kW\nCông suất xả | 10.24kW\nDòng sạc tối đa | 150A\nHiệu suất chuyển đổi | ≥ 95%\nChu kỳ sống | ≥ 8000 chu kỳ (90% DOD)\nKích thước (C x R x D) | 480 x 235 x 874 mm (tham khảo)\nKhối lượng | Khoảng 120 kg\nCấp bảo vệ | IP65\nNhiệt độ hoạt động | -20°C ~ 55°C\nGiao tiếp | CAN / RS485 / RS232\nBảo hành | 5 năm (có thể mở rộng)'}
+      deye:{on:true,auto:true,title:'DEYE',text:'Thương hiệu | DEYE\nCông suất | {kw}KW\nCông suất PV lắp đặt tối đa | 40.000W\nCông suất PV đầu vào tối đa | 32.000W\nĐiện áp PV tối đa | 800V\nDòng điện đầu vào tối đa | 36A + 36A\nDòng điện PV ngắn mạch | 54A + 54A\nHiệu suất | 97.6%\nCấp chống nước | IP65\nKích thước | 658 x 408 x 237 mm\nKhối lượng | ~32kg'},
+      lvtopsun:{on:true,auto:true,pick:'',title:'LVTOPSUN',text:'Model | LVTS-512314-G4\nLoại pin | Lithium Iron Phosphate (LiFePO₄)\nĐiện áp danh định | 51.2V (48V hệ thống)\nDung lượng danh định | 314Ah (tương đương 16.07kWh)\nĐiện áp hoạt động | 45.6 – 56.16V\nCông suất sạc | 7.68kW\nCông suất xả | 10.24kW\nDòng sạc tối đa | 150A\nHiệu suất chuyển đổi | ≥ 95%\nChu kỳ sống | ≥ 8000 chu kỳ (90% DOD)\nKích thước (C x R x D) | 480 x 235 x 874 mm (tham khảo)\nKhối lượng | Khoảng 120 kg\nCấp bảo vệ | IP65\nNhiệt độ hoạt động | -20°C ~ 55°C\nGiao tiếp | CAN / RS485 / RS232\nBảo hành | 5 năm (có thể mở rộng)'}
     },
     roi:{hours:4,price:3400,self:100},
     pay:[
@@ -826,6 +826,86 @@ function monthly(S){
   const rows=MONTH_DAYS.map((d,i)=>{const kwh=kwp*h*d;return {m:i+1,d,h,kwh,money:kwh*p*self}});
   return {rows,days:rows.reduce((a,r)=>a+r.d,0),kwh:rows.reduce((a,r)=>a+r.kwh,0),money:rows.reduce((a,r)=>a+r.money,0)};
 }
+/* ---- Thông số theo DATASHEET hãng (tự lấy theo cỡ inverter / công suất tấm pin đang chọn) ----
+   Deye: SUN-3/3.6/5/6.6/8.8K-OG03LP1-EU-AM1/AM2 (1 pha, pin 48V) – nguồn: datasheet Deye 11/2026
+   AE Solar: CMER-132BDS 610–630W (N-type TOPCon, 2 mặt kính) – nguồn: datasheet AESOLAR Ver.25.4.1
+   Cỡ không có trong datasheet -> dùng nội dung ô nhập tay (specs.*.text). */
+/* ---- Pin lưu trữ LVTopSun theo DATASHEET (product parameter) ---- */
+const LV_COM='CE, UN38.3';
+const LV_DS=(()=>{
+  const o={};
+  const R=a=>a.map(x=>x.join(' | ')).join('\n');
+  o.lvts512100={opt:'LVTS-512100-G3 – 51.2V 100Ah 5.12kWh',t:'LVTOPSUN LVTS-512100-G3',bh:0,rows:[['Thương hiệu','LVTOPSUN'],['Model','LVTS-512100-G3'],['Loại pin','Lithium Iron Phosphate (LiFePO₄), không Cobalt'],['Điện áp danh định','51.2Vdc'],['Dung lượng danh định','100Ah (5.12kWh)'],['Dòng sạc / công suất sạc','50A / 2560W'],['Dòng xả / công suất xả','100A / 5120W'],['Dòng ngắn mạch','350A'],['Màn hình','Cảm ứng màu'],['Giao tiếp','CAN, RS485, RS232'],['Kích thước (R x S x C)','440 x 138 x 600 mm'],['Khối lượng','47.3kg'],['Lắp đặt','Đứng sàn hoặc treo tường'],['Nhiệt độ làm việc','-20°C ~ 60°C'],['Độ ẩm','≤ 95%RH'],['Độ cao tối đa','≤ 2000m'],['Cấp bảo vệ','IP20'],['Chu kỳ sống','6000 chu kỳ @ 90% DOD / 25°C / 0.5C (60% EOL)'],['Mở rộng','Tối đa 15 pin song song'],['Chứng nhận',LV_COM]]};
+  o.lvts512314={opt:'LVTS-512314-G3 – 51.2V 314Ah 16.07kWh',t:'LVTOPSUN LVTS-512314-G3',bh:10,rows:[['Thương hiệu','LVTOPSUN'],['Model','LVTS-512314-G3'],['Loại pin','Lithium Iron Phosphate (LiFePO₄)'],['Điện áp danh định','51.2Vdc'],['Dung lượng danh định','314Ah (16.07kWh)'],['Điện áp sạc','56.16V'],['Dải điện áp xả','45.6V ~ 56.16V'],['Dòng sạc tối đa','150A'],['Dòng xả tối đa','200A'],['Màn hình','LED + LCD'],['Giao tiếp','CAN, RS485, RS232'],['Kích thước (R x S x C)','866 x 450 x 230 mm'],['Khối lượng','119kg'],['Nhiệt độ làm việc','Sạc 0°C ~ 45°C / Xả -20°C ~ 45°C'],['Độ ẩm','≤ 95%RH'],['Độ cao tối đa','≤ 2000m'],['Cấp bảo vệ','IP20'],['Chu kỳ sống','8000 chu kỳ @ 90% DOD / 25°C / 0.5C (60% EOL)']]};
+  o.lvts256100={opt:'LVTS-256100 – 25.6V 100Ah 2.56kWh',t:'LVTOPSUN LVTS-256100',bh:5,rows:[['Thương hiệu','LVTOPSUN'],['Model','LVTS-256100'],['Loại pin','Lithium Iron Phosphate (LiFePO₄), không Cobalt'],['Điện áp danh định','25.6Vdc'],['Dung lượng danh định','100Ah (2.56kWh)'],['Dòng sạc / công suất sạc','50A / 1280W'],['Dòng xả / công suất xả','100A / 2560W'],['Dòng ngắn mạch','≈ 2000A'],['Màn hình','LCD'],['Kích thước (R x S x C)','330 x 135 x 420 mm'],['Khối lượng','26kg'],['Lắp đặt','Treo tường'],['Nhiệt độ làm việc','-20°C ~ 60°C'],['Độ ẩm','≤ 95%RH'],['Độ cao tối đa','≤ 2000m'],['Cấp bảo vệ','IP20'],['Chu kỳ sống','6000 chu kỳ @ 80% DOD / 25°C / 0.5C (60% EOL)'],['Mở rộng','Tối đa 2 pin nối tiếp, 4 pin song song'],['Chứng nhận',LV_COM]]};
+  const m256=(id,ah,wh,ci,di,kg)=>({opt:'LVTS-'+id+' – 25.6V '+ah+'Ah '+(wh/1000).toFixed(2)+'kWh',t:'LVTOPSUN LVTS-'+id,bh:5,rows:[['Thương hiệu','LVTOPSUN'],['Model','LVTS-'+id],['Loại pin','Lithium Iron Phosphate (LiFePO₄), không Cobalt'],['Điện áp danh định','25.6Vdc'],['Dung lượng danh định',ah+'Ah ('+(wh/1000).toFixed(2)+'kWh)'],['Điện áp sạc','28.4V'],['Dải điện áp xả','22.8V ~ 28.4V'],['Dòng sạc tối đa',ci+'A'],['Dòng xả tối đa',di+'A'],['Giao tiếp','CAN, RS485, RS232'],['Kích thước (R x S x C)','580 x 430 x 230 mm'],['Khối lượng',kg+'kg'],['Lắp đặt','Treo tường'],['Nhiệt độ làm việc','-20°C ~ 60°C'],['Cấp bảo vệ','IP20'],['Chu kỳ sống','6000 chu kỳ @ 80% DOD / 25°C / 0.5C (60% EOL)'],['Mở rộng','Tối đa 2 pin nối tiếp, 4 pin song song'],['Chứng nhận',LV_COM]]});
+  o.lvts256200=m256('256200',200,5120,100,160,'50');
+  o.lvts256280=m256('256280',280,7168,140,200,'62.5');
+  const m560=(id,ah,kwh)=>({opt:'LVTS-'+id+' – 51.2V '+ah+'Ah '+kwh+'kWh',t:'LVTOPSUN LVTS-'+id,bh:5,rows:[['Thương hiệu','LVTOPSUN'],['Model','LVTS-'+id],['Loại pin','Lithium Iron Phosphate (LiFePO₄), Grade A'],['Điện áp danh định','51.2Vdc'],['Dung lượng danh định',ah+'Ah ('+kwh+'kWh)'],['Dòng sạc / công suất sạc','150A / 7.68kW'],['Dòng xả / công suất xả','200A / 10.24kW'],['Dòng ngắn mạch','540A'],['Màn hình','Cảm ứng màu'],['Giao tiếp','CAN, RS485, RS232'],['Kích thước (R x S x C)','800 x 325 x 900 mm'],['Khối lượng','240kg'],['Lắp đặt','Đứng sàn'],['Nhiệt độ làm việc','Sạc 0°C ~ 55°C / Xả -20°C ~ 55°C'],['Cấp bảo vệ','IP20'],['Chu kỳ sống','6000 chu kỳ @ 80% DOD / 25°C / 0.5C (60% EOL)'],['Mở rộng','Tối đa 63 pin song song'],['Chứng nhận',LV_COM]]});
+  o.lvts512560=m560('512560',560,'28.6');
+  o.lvts512628=m560('512628',628,'32');
+  const aioA=[50,100,150,200],aioP=[2500,5000,7500,10000],aioD=[100,200,200,200],aioDP=[5000,10000,10000,10000],aioH=['365','503.5','642','780.5'],aioW=['45','87.5','130','172.5'];
+  for(let n=1;n<=4;n++)o['aio'+n]={opt:'All-in-one LVTS-512100-'+n+'-AI0 – '+(5.12*n).toFixed(2)+'kWh + inverter 5kW',t:'LVTOPSUN LVTS-512100-'+n+'-AI0',bh:5,rows:[['Thương hiệu','LVTOPSUN'],['Model','LVTS-512100-'+n+'-AI0 (All-in-one)'],['Inverter tích hợp','5000VA / 5000W, 1 pha, 230VAC 50/60Hz'],['Dòng AC ra / vào','22A / 40A (dòng sạc AC tối đa 80A)'],['Điện áp PV tối đa (Voc)','450VDC (MPPT 120 ~ 430VDC, 18A)'],['Điện áp danh định pin','51.2Vdc'],['Dung lượng danh định',(100*n)+'Ah ('+(5.12*n).toFixed(2)+'kWh)'],['Dòng / công suất sạc tối đa',aioA[n-1]+'A / '+aioP[n-1]+'W'],['Dòng / công suất xả tối đa',aioD[n-1]+'A / '+aioDP[n-1]+'W'],['Giao tiếp','RS232, RS485, CAN'],['Kích thước (R x S x C)','650 x 380 x '+aioH[n-1]+' mm'],['Khối lượng',aioW[n-1]+'kg'],['Nhiệt độ làm việc','-20°C ~ 60°C'],['Chu kỳ sống','6000 chu kỳ @ 90% DOD / 25°C / 0.5C (60% EOL)'],['Mở rộng','Tối đa 15 pin song song'],['Bảo hành','Inverter 2 năm, pin 5 năm']],fixedWar:true};
+  return o;
+})();
+const LV_BY_CAP={'5.12':'lvts512100','16.07':'lvts512314'};
+const DEYE_DS={
+  '3':  {m:'SUN-3K-OG03LP1-EU-AM1',  ac:3000,acA:'13.1',pvIn:6000, pvMax:4800,  imp:'18A',     isc:'27A',     mppt:'1 / 1',     bat:'70A', grid:'35A',kg:'8.6', noise:'<46dB'},
+  '3.6':{m:'SUN-3.6K-OG03LP1-EU-AM1',ac:3600,acA:'15.7',pvIn:7200, pvMax:5760,  imp:'18A',     isc:'27A',     mppt:'1 / 1',     bat:'90A', grid:'35A',kg:'8.6', noise:'<46dB'},
+  '5':  {m:'SUN-5K-OG03LP1-EU-AM2',  ac:5000,acA:'21.8',pvIn:10000,pvMax:8000,  imp:'18A + 18A',isc:'27A + 27A',mppt:'2 / 1+1',  bat:'120A',grid:'35A',kg:'8.6', noise:'<46dB'},
+  '6.6':{m:'SUN-6.6K-OG03LP1-EU-AM2',ac:6600,acA:'28.7',pvIn:13200,pvMax:10560, imp:'18A + 18A',isc:'27A + 27A',mppt:'2 / 1+1',  bat:'140A',grid:'35A',kg:'8.6', noise:'<46dB'},
+  '8.8':{m:'SUN-8.8K-OG03LP1-EU-AM2',ac:8800,acA:'38.3',pvIn:17600,pvMax:14080, imp:'36A + 18A',isc:'54A + 27A',mppt:'2 / 2+1',  bat:'190A',grid:'50A',kg:'10.6',noise:'<50dB'}
+};
+/* Cỡ trong bảng giá của app (6kW, 8kW) tương ứng model thực tế 6.6kW, 8.8kW của datasheet */
+const DEYE_ALIAS={'6':'6.6','8':'8.8'};
+const AE_DS={
+  610:{vmp:'40.80',imp:'14.95',voc:'49.00',isc:'15.96',eff:'22.60'},
+  615:{vmp:'41.10',imp:'14.96',voc:'49.30',isc:'15.99',eff:'22.79'},
+  620:{vmp:'41.40',imp:'14.98',voc:'49.60',isc:'16.03',eff:'22.97'},
+  625:{vmp:'41.70',imp:'14.99',voc:'49.90',isc:'16.06',eff:'23.16'},
+  630:{vmp:'42.00',imp:'15.00',voc:'50.20',isc:'16.09',eff:'23.34'}
+};
+const dotN=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+function specSrc(S,key){
+  const s=(S.specs&&S.specs[key])||{title:'',text:''};
+  if(s.auto===false)return s;
+  if(key==='deye'&&+S.system.phase===1){
+    const k=String(+S.system.invkw),d=DEYE_DS[DEYE_ALIAS[k]||k];
+    if(d)return {title:'DEYE '+d.m,auto:true,text:[
+      'Thương hiệu | DEYE','Model | '+d.m,
+      'Công suất định mức | '+dotN(d.ac)+'W ('+(d.ac/1000)+'kW)',
+      'Công suất PV lắp đặt tối đa | '+dotN(d.pvIn)+'W','Công suất PV đầu vào tối đa | '+dotN(d.pvMax)+'W',
+      'Điện áp PV tối đa | 500V','Điện áp khởi động | 125V','Dải điện áp MPPT | 150 – 425V',
+      'Số MPPT / số chuỗi | '+d.mppt,'Dòng điện đầu vào tối đa | '+d.imp,'Dòng điện PV ngắn mạch | '+d.isc,
+      'Công suất đỉnh | 2 lần công suất định mức (10 giây)','Dòng điện AC tối đa | '+d.acA+'A',
+      'Loại pin / điện áp pin | Lead-acid hoặc Lithium-ion / 40 – 60V','Dòng sạc/xả tối đa | '+d.bat,
+      'Hiệu suất tối đa | 97.6% (Euro 96.5%)','Cấp chống nước | IP65',
+      'Kích thước | 323 x 424 x 176 mm','Khối lượng | '+d.kg+'kg','Bảo hành | 5 năm (theo nhà sản xuất)'].join('\n')};
+  }
+  if(key==='ae'){
+    const d=AE_DS[+S.system.wp];
+    if(d)return {title:'AE SOLAR',auto:true,text:[
+      'Thương hiệu | AE Solar','Model | AE CMER-132BDS',
+      'Công nghệ | N-type TOPCon (2 mặt kính, bifacial)','Công suất định mức (Pmax) | '+(+S.system.wp)+'Wp',
+      'Hiệu suất module | '+d.eff+'%','Điện áp tại công suất tối đa (Vmp) | '+d.vmp+'V',
+      'Dòng điện tại công suất tối đa (Imp) | '+d.imp+'A','Điện áp hở mạch (Voc) | '+d.voc+'V',
+      'Dòng điện ngắn mạch (Isc) | '+d.isc+'A','Số cell | 132 half-cell',
+      'Kích thước (Dài x Rộng x Dày) | 2383 x 1133 x 30 mm','Trọng lượng | 33.7 kg',
+      'Bảo hành | 15 năm sản phẩm, 30 năm hiệu suất'].join('\n')};
+  }
+  if(key==='lvtopsun'){
+    let id=s.pick||'';
+    let b=null;
+    if(!id){const r=(S.rows||[]).find(x=>x.priceSrc==='battery'&&x.batId&&x.show);b=r?BATTERIES.find(x=>x.id===r.batId):null;id=b?(LV_BY_CAP[String(b.cap)]||''):'';}
+    const d=LV_DS[id];
+    if(d){
+      const rows=d.rows.slice();
+      if(!d.fixedWar){const w=b?b.bh:d.bh;if(w)rows.push(['Bảo hành',w+' năm (theo nhà sản xuất)']);}
+      return {title:d.t,auto:true,text:rows.map(x=>x.join(' | ')).join('\n')};
+    }
+  }
+  return s;
+}
 function parseSpec(t,S){
   return String(t||'').split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{
     const i=l.indexOf('|');const k=i<0?l:l.slice(0,i).trim(),v=i<0?'':l.slice(i+1).trim();
@@ -863,9 +943,9 @@ function buildDossierBlocks(S,c,opt){
   /* Thông số sản phẩm */
   const sp=S.specs||{};
   const imgBlock=key=>{const im=LIB[key];if(!im)return null;const dw=Math.min(150*im.w/im.h,200);return {k:'img',data:im.data,w:im.w,h:im.h,dw:Math.round(dw)}};
-  const specBlock=key=>{const s=sp[key],im=LIB[key];return {k:'spec',img:im?{data:im.data,w:im.w,h:im.h}:null,title:s.title,rows:parseSpec(s.text,S)}};
+  const specBlock=key=>{const s=specSrc(S,key),im=LIB[key];return {k:'spec',img:im?{data:im.data,w:im.w,h:im.h}:null,title:s.title,rows:parseSpec(s.text,S)}};
   const specTable=key=>{
-    const s=sp[key];const t={k:'table',cols:[45,55],head:[{t:'Thông số kỹ thuật',a:'l'},{t:s.title,a:'l'}],rows:parseSpec(s.text,S).map(r=>({cells:[{t:r[0],a:'l',b:1},{t:r[1],a:'l'}]}))};
+    const s=specSrc(S,key);const t={k:'table',cols:[45,55],head:[{t:'Thông số kỹ thuật',a:'l'},{t:s.title,a:'l'}],rows:parseSpec(s.text,S).map(r=>({cells:[{t:r[0],a:'l',b:1},{t:r[1],a:'l'}]}))};
     return t;
   };
   const anySpec=['ae','canadian','deye','lvtopsun'].some(k=>sp[k]&&sp[k].on&&(k!=='lvtopsun'||hasBat));
@@ -961,7 +1041,7 @@ function RN(s,fl){
 const runsHtml=runs=>(runs||[]).map(r=>{let t=esc(r.t).replace(/\n/g,'<br>');if(r.b)t=`<b>${t}</b>`;if(r.i)t=`<i>${t}</i>`;if(r.hl)t=`<mark>${t}</mark>`;return t}).join('');
 function specVal(S,key,label){
   const s=S.specs&&S.specs[key];if(!s)return '';
-  const l=parseSpec(s.text,S).find(r=>r[0].toLowerCase().indexOf(label.toLowerCase())===0);return l?l[1]:'';
+  const l=parseSpec(specSrc(S,key).text,S).find(r=>r[0].toLowerCase().indexOf(label.toLowerCase())===0);return l?l[1]:'';
 }
 function buildContractBlocks(S,c){
   const K=S.contract,P=K.p,cu=S.customer,sy=S.system,UN=[];
