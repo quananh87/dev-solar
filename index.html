@@ -319,7 +319,7 @@ const n2=n=>String(Math.round((+n||0)*100)/100);
 
 function defaults(){
   return {
-    company:{name:'CÔNG TY TNHH ROBUST',slogan:'DevSolar - Power the Future',address:'238-240-242 Nguyễn Oanh, P. Gò Vấp, TP. Hồ Chí Minh',mst:'0317311678',phone:'0938.233.516',web:'devsolar.com.vn',email:'sale01@devsolar.com.vn',contact:'0902.483.614',tiktok:'Devsolar',address2:'238 – 240 – 242, Nguyễn Oanh, phường Gò Vấp, Thành phố Hồ Chí Minh',signer:'CÔNG TY TNHH ROBUST',logo:'data:image/png;base64,'+LOGO_B64,logoW:LOGO_W,logoH:LOGO_H},
+    company:{name:'CÔNG TY TNHH ROBUST',slogan:'DevSolar - Power the Future',address:'238-240-242 Nguyễn Oanh, P. Gò Vấp, TP. Hồ Chí Minh',mst:'0317311678',phone:'0938.233.516',web:'devsolar.com.vn',email:'sale01@devsolar.com.vn',contact:'0937.677.889 - 0933.276.984',tiktok:'Devsolar',address2:'238 – 240 – 242, Nguyễn Oanh, phường Gò Vấp, Thành phố Hồ Chí Minh',signer:'CÔNG TY TNHH ROBUST',logo:'data:image/png;base64,'+LOGO_B64,logoW:LOGO_W,logoH:LOGO_H},
     contract:{
       no:'',quoteNo:'',quoteDate:'',signDate:todayISO(),place:'',type:'auto',usage:'self',auth:false,
       a:{mst:'',email:'',rep:'',title:'',authNo:'',authDate:'',bankNo:'',bankName:''},
@@ -1499,6 +1499,11 @@ function migrateList(st){
     st.mig21=true;
   }
   /* v22: bỏ dòng "Nhân công thi công" khỏi mô tả mọi dòng Giàn khung (nhân công đã tách thành dòng "Thi công lắp đặt") */
+  /* v23: cập nhật số liên hệ cuối báo giá ("Mọi thắc mắc vui lòng liên hệ") */
+  if(!st.mig23){
+    if(st.company&&st.company.contact==='0902.483.614')st.company.contact='0937.677.889 - 0933.276.984';
+    st.mig23=true;
+  }
   if(!st.mig22){
     st.rows.forEach(r=>{if(/giàn khung/i.test(r.name||'')&&typeof r.desc==='string')r.desc=r.desc.split('\n').filter(l=>!/^[\s\-•–]*nhân công thi công\s*\.?\s*$/i.test(l)).join('\n');});
     st.mig22=true;
@@ -1507,7 +1512,7 @@ function migrateList(st){
 }
 function load(){
   try{const raw=localStorage.getItem(LS_KEY);if(raw)return migrateList(merge(defaults(),JSON.parse(raw)));}catch(e){}
-  const d0=defaults();d0.mig18=true;d0.mig19=true;d0.mig20=true;d0.mig21=true;d0.mig22=true;return d0;
+  const d0=defaults();d0.mig18=true;d0.mig19=true;d0.mig20=true;d0.mig21=true;d0.mig22=true;d0.mig23=true;return d0;
 }
 let saveT;
 function persist(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(LS_KEY,JSON.stringify(S))}catch(e){}},300)}
